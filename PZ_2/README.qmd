@@ -1,6 +1,6 @@
 ---
 title: "Практическое задание №2"
-author: "Журавлева Юлия"
+author: "Журавлева Юлия БИСО-01-20"
 format:   
   md:
     output-file: README.md
