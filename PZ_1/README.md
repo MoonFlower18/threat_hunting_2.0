@@ -29,10 +29,11 @@
 
 1.  Проверить доступность данных в Yandex Object Storage
 
-Проверьте доступность данных (файл yaqry_dataset.pqt) в бакете
-arrow-datasets S3 хранилища Yandex Object Storage. О принципах
-построения пути можно посмотреть здесь. Проверить можно просто перейдя
-по правильно сконструированному URL в браузере.
+Проверим доступность данных (файл yaqry_dataset.pqt) в бакете
+arrow-datasets S3 хранилища Yandex Object Storage. Проверить можно
+просто перейдя по правильно сконструированному URL в браузере.
+
+    https://storage.yandexcloud.net/arrow-datasets/yaqry_dataset.pqt
 
 1.  Подключить бакет как источник данных для Yandex Query
 
