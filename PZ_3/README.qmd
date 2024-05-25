@@ -64,8 +64,17 @@ library(tidyverse)
 library(dplyr)
 ```
 
+- Далее скачаем необходимый для работы датасет.
 
+```{r}
+dir.create("data", showWarnings = FALSE)
 
+curl::multi_download(
+  "https://storage.yandexcloud.net/arrow-datasets/tm_data.pqt",
+  "data/tm_data.pqt",
+  resume = TRUE
+)
+```
 
 
 

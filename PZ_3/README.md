@@ -101,6 +101,24 @@ library(tidyverse)
 library(dplyr)
 ```
 
+-   Далее скачаем необходимый для работы датасет.
+
+``` r
+dir.create("data", showWarnings = FALSE)
+
+curl::multi_download(
+  "https://storage.yandexcloud.net/arrow-datasets/tm_data.pqt",
+  "data/tm_data.pqt",
+  resume = TRUE
+)
+```
+
+    # A tibble: 1 × 10
+      success status_code resumefrom url    destfile error type  modified           
+      <lgl>         <int>      <dbl> <chr>  <chr>    <chr> <chr> <dttm>             
+    1 TRUE            200          0 https… data/tm… <NA>  appl… 2024-02-19 12:25:05
+    # ℹ 2 more variables: time <dbl>, headers <list>
+
 ## Обработка данных
 
 Задание 1: Найдите утечку данных из Вашей сети Задание 2: Найдите утечку
