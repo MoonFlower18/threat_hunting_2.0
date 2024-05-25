@@ -54,6 +54,39 @@
 
 ![](screen/3.png)
 
+### 2. Настройка rabochego prprpr
+
+``` r
+library(arrow)
+```
+
+    Some features are not enabled in this build of Arrow. Run `arrow_info()` for more information.
+
+
+    Attaching package: 'arrow'
+
+    The following object is masked from 'package:utils':
+
+        timestamp
+
+``` r
+library(tidyverse)
+```
+
+    ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+    ✔ dplyr     1.1.4     ✔ readr     2.1.5
+    ✔ forcats   1.0.0     ✔ stringr   1.5.1
+    ✔ ggplot2   3.4.4     ✔ tibble    3.2.1
+    ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+    ✔ purrr     1.0.2     
+    ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+    ✖ lubridate::duration() masks arrow::duration()
+    ✖ dplyr::filter()       masks stats::filter()
+    ✖ dplyr::lag()          masks stats::lag()
+    ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+dfdfdf
+
 ## Обработка данных
 
 Задание 1: Найдите утечку данных из Вашей сети Задание 2: Найдите утечку

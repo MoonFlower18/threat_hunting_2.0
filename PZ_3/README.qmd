@@ -52,6 +52,22 @@ chmod =600 /home/kali/Downloads/rstudio.key
 
 ![](screen/3.png)
 
+### 2. Настройка rabochego prprpr
+
+```{r}
+library(arrow)
+```
+
+```{r}
+library(tidyverse)
+```
+
+dfdfdf
+
+
+
+
+
 ## Обработка данных
 
 Задание 1: Найдите утечку данных из Вашей сети
