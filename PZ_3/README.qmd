@@ -46,14 +46,15 @@ PS C:\Users\Юлия> ssh -i "C:\Users\\Downloads\Telegram Desktop\rstudio.key" 
 
 ![](screen/3.png)
 
-<<<<<<< HEAD
 ```{r}
 library(arrow, warn.conflicts = FALSE)
 ```
 
 ```{r}
 library(tidyverse, warn.conflicts = FALSE)
-=======
+```
+
+
 ### 2. Настройка рабочего пространства.
 
 ```{r}
@@ -62,17 +63,12 @@ library(arrow)
 
 ```{r}
 library(tidyverse)
->>>>>>> c71a422c58b13cbc128baa5a400a3bc587cb07bc
 ```
 
 
 
 
-<<<<<<< HEAD
-=======
 
-
->>>>>>> c71a422c58b13cbc128baa5a400a3bc587cb07bc
 ## Обработка данных
 
 Задание 1: Найдите утечку данных из Вашей сети

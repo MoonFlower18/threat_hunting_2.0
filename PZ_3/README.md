@@ -51,23 +51,14 @@
 
 ![](screen/3.png)
 
-### 2. Настройка рабочего пространства.
-
 ``` r
-library(arrow)
+library(arrow, warn.conflicts = FALSE)
 ```
 
     Some features are not enabled in this build of Arrow. Run `arrow_info()` for more information.
 
-
-    Attaching package: 'arrow'
-
-    The following object is masked from 'package:utils':
-
-        timestamp
-
 ``` r
-library(tidyverse)
+library(tidyverse, warn.conflicts = FALSE)
 ```
 
     ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
@@ -81,6 +72,16 @@ library(tidyverse)
     ✖ dplyr::filter()       masks stats::filter()
     ✖ dplyr::lag()          masks stats::lag()
     ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+### 2. Настройка рабочего пространства.
+
+``` r
+library(arrow)
+```
+
+``` r
+library(tidyverse)
+```
 
 ## Обработка данных
 
