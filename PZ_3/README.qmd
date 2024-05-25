@@ -52,6 +52,17 @@ chmod =600 /home/kali/Downloads/rstudio.key
 
 ![](screen/3.png)
 
+```{r}
+library(arrow, warn.conflicts = FALSE)
+```
+
+```{r}
+library(tidyverse, warn.conflicts = FALSE)
+```
+
+
+
+
 ## Обработка данных
 
 Задание 1: Найдите утечку данных из Вашей сети
