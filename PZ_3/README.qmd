@@ -81,6 +81,15 @@ full_df <- arrow::open_dataset(sources = "dataset/ya_dt.pqt", format  = "parquet
 full_df %>% glimpse()
 ```
 
+- Заметим, что с полем `timestamp` что-то не так, а именно указан неверный тип данных. Приведём его в более понятный вид.
+
+```{r}
+full_df <- full_df %>% mutate(timestamp = as_datetime(timestamp / 1000, origin = "1970-01-01", tz = "UTC"))
+full_df %>% glimpse()
+```
+
+
+
 
 
 ## Обработка данных

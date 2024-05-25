@@ -139,6 +139,23 @@ full_df %>% glimpse()
     $ bytes      <int32> 57354, 11895, 898, 7496, 20979, 8620, 46033, 1500, 979, 103…
     Call `print()` for full schema details
 
+-   Заметим, что с полем `timestamp` что-то не так, а именно указан
+    неверный тип данных. Приведём его в более понятный вид.
+
+``` r
+full_df <- full_df %>% mutate(timestamp = as_datetime(timestamp / 1000, origin = "1970-01-01", tz = "UTC"))
+full_df %>% glimpse()
+```
+
+    FileSystemDataset with 1 Parquet file (query)
+    105,747,730 rows x 5 columns
+    $ timestamp <timestamp[ns, tz=UTC]> 2020-01-06 16:29:00, 2020-01-06 16:29:00, 20…
+    $ src                      <string> "16.91.54.88", "18.37.49.104", "14.57.70.39"…
+    $ dst                      <string> "12.31.37.100", "12.31.121.103", "14.36.60.5…
+    $ port                      <int32> 56, 40, 123, 115, 82, 57, 39, 105, 52, 74, 5…
+    $ bytes                     <int32> 15692, 63755, 1500, 49163, 1209, 12128, 7554…
+    Call `print()` for query details
+
 ## Обработка данных
 
 Задание 1: Найдите утечку данных из Вашей сети Задание 2: Найдите утечку
