@@ -15,7 +15,7 @@
 
 ## Исходные данные
 
-1.  ОС Kali Linux
+1.  Ноутбук с ОС Windows 10
 2.  Apache Arrow
 3.  Yandex Object Storage
 4.  RStudio Server
@@ -35,17 +35,14 @@
 
 <!-- -->
 
-    ssh -i /home/kali/Downloads/rstudio.key -L 8787:127.0.0.1:8787 user18@62.84.123.211
-
-В случае, если команда выдаёт ошибку в доступе по .key, связанную с
-правами пользователя, то перед повторным подключением поменяем права
-командой.
-
-    chmod =600 /home/kali/Downloads/rstudio.key
+    PS C:\Users\Юлия> ssh -i "C:\Users\\Downloads\Telegram Desktop\rstudio.key" -L 8787:127.0.0.1:8787 user18@62.84.123.211
 
 ![](screen/1.png)
 
--   Поменяем пароль с дефолтного на персональный.
+-   Поменяем пароль с дефолтного на персональный. Скриншот предоставлен
+    с системы Kali Linux, так как первоначальная настройка была именно
+    на нём, но из-за возникших проблем на ВМ, пришлось перейти на
+    основную систему Windows.
 
 ![](screen/2.png)
 
@@ -53,6 +50,37 @@
     пользователем `user18`.
 
 ![](screen/3.png)
+
+### 2. Настройка рабочего пространства.
+
+``` r
+library(arrow)
+```
+
+    Some features are not enabled in this build of Arrow. Run `arrow_info()` for more information.
+
+
+    Attaching package: 'arrow'
+
+    The following object is masked from 'package:utils':
+
+        timestamp
+
+``` r
+library(tidyverse)
+```
+
+    ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+    ✔ dplyr     1.1.4     ✔ readr     2.1.5
+    ✔ forcats   1.0.0     ✔ stringr   1.5.1
+    ✔ ggplot2   3.4.4     ✔ tibble    3.2.1
+    ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+    ✔ purrr     1.0.2     
+    ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+    ✖ lubridate::duration() masks arrow::duration()
+    ✖ dplyr::filter()       masks stats::filter()
+    ✖ dplyr::lag()          masks stats::lag()
+    ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 
 ## Обработка данных
 
