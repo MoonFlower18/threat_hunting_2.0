@@ -51,14 +51,37 @@
 
 ![](screen/3.png)
 
+-   Настроим Git на RStudio Server с помощью SSH ключа. Так как
+    изначально установка была на ОС Kali Linux, то повторной
+    аутентификации на ОС Windows не потребовалось.
+
+![](screen/4.png)
+
+Однако этого оказалось недостаточно для пуша в репозиторий, поэтому
+после танцев с бубном, спасение нашлось в индивидуальном токене
+пользователя на замену аутентификации по паролю.
+
+![](screen/5.png)
+
+### 2. Настройка рабочего пространства
+
+-   Первым делом установим необходимые билбиотеки
+
 ``` r
-library(arrow, warn.conflicts = FALSE)
+library(arrow)
 ```
 
     Some features are not enabled in this build of Arrow. Run `arrow_info()` for more information.
 
+
+    Attaching package: 'arrow'
+
+    The following object is masked from 'package:utils':
+
+        timestamp
+
 ``` r
-library(tidyverse, warn.conflicts = FALSE)
+library(tidyverse)
 ```
 
     ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
@@ -67,20 +90,15 @@ library(tidyverse, warn.conflicts = FALSE)
     ✔ ggplot2   3.4.4     ✔ tibble    3.2.1
     ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
     ✔ purrr     1.0.2     
+
     ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
     ✖ lubridate::duration() masks arrow::duration()
     ✖ dplyr::filter()       masks stats::filter()
     ✖ dplyr::lag()          masks stats::lag()
     ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 
-### 2. Настройка рабочего пространства.
-
 ``` r
-library(arrow)
-```
-
-``` r
-library(tidyverse)
+library(dplyr)
 ```
 
 ## Обработка данных

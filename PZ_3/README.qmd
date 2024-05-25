@@ -46,24 +46,26 @@ PS C:\Users\Юлия> ssh -i "C:\Users\\Downloads\Telegram Desktop\rstudio.key" 
 
 ![](screen/3.png)
 
-```{r}
-library(arrow, warn.conflicts = FALSE)
-```
+- Настроим Git на RStudio Server с помощью SSH ключа. Так как изначально установка была на ОС Kali Linux, то повторной аутентификации на ОС Windows не потребовалось. 
 
-```{r}
-library(tidyverse, warn.conflicts = FALSE)
-```
+![](screen/4.png)
 
+Однако этого оказалось недостаточно для пуша в репозиторий, поэтому после танцев с бубном, спасение нашлось в индивидуальном токене пользователя на замену аутентификации по паролю.
 
-### 2. Настройка рабочего пространства.
+![](screen/5.png)
+
+### 2. Настройка рабочего пространства
+
+- Первым делом установим необходимые билбиотеки
 
 ```{r}
 library(arrow)
+library(tidyverse)
+library(dplyr)
 ```
 
-```{r}
-library(tidyverse)
-```
+
+
 
 
 
