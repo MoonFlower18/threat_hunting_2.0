@@ -106,17 +106,38 @@ library(dplyr)
 
 ``` r
 dir.create("dataset")
+```
 
+    Warning in dir.create("dataset"): 'dataset' already exists
+
+``` r
 curl::multi_download("https://storage.yandexcloud.net/arrow-datasets/tm_data.pqt", "dataset/ya_dt.pqt",
   resume = TRUE
 )
 ```
 
     # A tibble: 1 × 10
-      success status_code resumefrom url    destfile error type  modified           
-      <lgl>         <int>      <dbl> <chr>  <chr>    <chr> <chr> <dttm>             
-    1 TRUE            200          0 https… dataset… <NA>  appl… 2024-02-19 12:25:05
+      success status_code resumefrom url    destfile error type  modified
+      <lgl>         <int>      <dbl> <chr>  <chr>    <chr> <chr> <dttm>  
+    1 TRUE            416          0 https… /home/u… <NA>  appl… NA      
     # ℹ 2 more variables: time <dbl>, headers <list>
+
+-   Посмотрим содержимое нашего датасета, чтобы убедиться, что он
+    работает.
+
+``` r
+full_df <- arrow::open_dataset(sources = "dataset/ya_dt.pqt", format  = "parquet")
+full_df %>% glimpse()
+```
+
+    FileSystemDataset with 1 Parquet file
+    105,747,730 rows x 5 columns
+    $ timestamp <double> 1.578326e+12, 1.578326e+12, 1.578326e+12, 1.578326e+12, 1.5…
+    $ src       <string> "13.43.52.51", "16.79.101.100", "18.43.118.103", "15.71.108…
+    $ dst       <string> "18.70.112.62", "12.48.65.39", "14.51.30.86", "14.50.119.33…
+    $ port       <int32> 40, 92, 27, 57, 115, 92, 65, 123, 79, 72, 123, 123, 22, 118…
+    $ bytes      <int32> 57354, 11895, 898, 7496, 20979, 8620, 46033, 1500, 979, 103…
+    Call `print()` for full schema details
 
 ## Обработка данных
 

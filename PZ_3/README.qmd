@@ -74,7 +74,12 @@ curl::multi_download("https://storage.yandexcloud.net/arrow-datasets/tm_data.pqt
 )
 ```
 
+- Посмотрим содержимое нашего датасета, чтобы убедиться, что он работает.
 
+```{r}
+full_df <- arrow::open_dataset(sources = "dataset/ya_dt.pqt", format  = "parquet")
+full_df %>% glimpse()
+```
 
 
 
