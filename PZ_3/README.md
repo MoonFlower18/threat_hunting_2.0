@@ -101,9 +101,22 @@ library(tidyverse)
 library(dplyr)
 ```
 
--   Далее скачаем необходимый для работы датасет.
+-   Далее создаем директорию dataset и загружаем в нее dataframe
+    arrow-datasets/tm_data.pqt из Yandex Object Storage.
 
-ffff
+``` r
+dir.create("dataset")
+
+curl::multi_download("https://storage.yandexcloud.net/arrow-datasets/tm_data.pqt", "dataset/ya_dt.pqt",
+  resume = TRUE
+)
+```
+
+    # A tibble: 1 × 10
+      success status_code resumefrom url    destfile error type  modified           
+      <lgl>         <int>      <dbl> <chr>  <chr>    <chr> <chr> <dttm>             
+    1 TRUE            200          0 https… dataset… <NA>  appl… 2024-02-19 12:25:05
+    # ℹ 2 more variables: time <dbl>, headers <list>
 
 ## Обработка данных
 

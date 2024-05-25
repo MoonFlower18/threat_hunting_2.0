@@ -64,10 +64,17 @@ library(tidyverse)
 library(dplyr)
 ```
 
-- Далее скачаем необходимый для работы датасет.
+- Далее создаем директорию dataset и загружаем в нее dataframe arrow-datasets/tm_data.pqt из Yandex Object Storage.
+
+```{r}
+dir.create("dataset")
+
+curl::multi_download("https://storage.yandexcloud.net/arrow-datasets/tm_data.pqt", "dataset/ya_dt.pqt",
+  resume = TRUE
+)
+```
 
 
-ffff
 
 
 
