@@ -71,12 +71,12 @@
 library(arrow)
 ```
 
-    Some features are not enabled in this build of Arrow. Run `arrow_info()` for more information.
+    Warning: пакет 'arrow' был собран под R версии 4.2.3
 
 
-    Attaching package: 'arrow'
+    Присоединяю пакет: 'arrow'
 
-    The following object is masked from 'package:utils':
+    Следующий объект скрыт от 'package:utils':
 
         timestamp
 
@@ -84,11 +84,31 @@ library(arrow)
 library(tidyverse)
 ```
 
+    Warning: пакет 'tidyverse' был собран под R версии 4.2.3
+
+    Warning: пакет 'ggplot2' был собран под R версии 4.2.3
+
+    Warning: пакет 'tibble' был собран под R версии 4.2.3
+
+    Warning: пакет 'tidyr' был собран под R версии 4.2.3
+
+    Warning: пакет 'readr' был собран под R версии 4.2.3
+
+    Warning: пакет 'purrr' был собран под R версии 4.2.3
+
+    Warning: пакет 'dplyr' был собран под R версии 4.2.3
+
+    Warning: пакет 'stringr' был собран под R версии 4.2.3
+
+    Warning: пакет 'forcats' был собран под R версии 4.2.3
+
+    Warning: пакет 'lubridate' был собран под R версии 4.2.3
+
     ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-    ✔ dplyr     1.1.4     ✔ readr     2.1.5
-    ✔ forcats   1.0.0     ✔ stringr   1.5.1
+    ✔ dplyr     1.1.4     ✔ readr     2.1.4
+    ✔ forcats   1.0.0     ✔ stringr   1.5.0
     ✔ ggplot2   3.4.4     ✔ tibble    3.2.1
-    ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+    ✔ lubridate 1.9.3     ✔ tidyr     1.3.0
     ✔ purrr     1.0.2     
 
     ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
@@ -104,11 +124,11 @@ library(dplyr)
 -   Далее скачаем необходимый для работы датасет.
 
 ``` r
-dir.create("data", showWarnings = FALSE)
+dir.create("dataset", showWarnings = FALSE)
 
 curl::multi_download(
   "https://storage.yandexcloud.net/arrow-datasets/tm_data.pqt",
-  "data/tm_data.pqt",
+  "dataset/ya_df.pqt",
   resume = TRUE
 )
 ```
@@ -116,8 +136,10 @@ curl::multi_download(
     # A tibble: 1 × 10
       success status_code resumefrom url    destfile error type  modified           
       <lgl>         <int>      <dbl> <chr>  <chr>    <chr> <chr> <dttm>             
-    1 TRUE            200          0 https… data/tm… <NA>  appl… 2024-02-19 12:25:05
+    1 TRUE            200          0 https… "C:\\Us… <NA>  appl… 2024-02-19 15:25:05
     # ℹ 2 more variables: time <dbl>, headers <list>
+
+ffff
 
 ## Обработка данных
 
