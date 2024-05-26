@@ -71,12 +71,12 @@
 library(arrow)
 ```
 
-    Some features are not enabled in this build of Arrow. Run `arrow_info()` for more information.
+    Warning: пакет 'arrow' был собран под R версии 4.2.3
 
 
-    Attaching package: 'arrow'
+    Присоединяю пакет: 'arrow'
 
-    The following object is masked from 'package:utils':
+    Следующий объект скрыт от 'package:utils':
 
         timestamp
 
@@ -84,11 +84,31 @@ library(arrow)
 library(tidyverse)
 ```
 
+    Warning: пакет 'tidyverse' был собран под R версии 4.2.3
+
+    Warning: пакет 'ggplot2' был собран под R версии 4.2.3
+
+    Warning: пакет 'tibble' был собран под R версии 4.2.3
+
+    Warning: пакет 'tidyr' был собран под R версии 4.2.3
+
+    Warning: пакет 'readr' был собран под R версии 4.2.3
+
+    Warning: пакет 'purrr' был собран под R версии 4.2.3
+
+    Warning: пакет 'dplyr' был собран под R версии 4.2.3
+
+    Warning: пакет 'stringr' был собран под R версии 4.2.3
+
+    Warning: пакет 'forcats' был собран под R версии 4.2.3
+
+    Warning: пакет 'lubridate' был собран под R версии 4.2.3
+
     ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-    ✔ dplyr     1.1.4     ✔ readr     2.1.5
-    ✔ forcats   1.0.0     ✔ stringr   1.5.1
+    ✔ dplyr     1.1.4     ✔ readr     2.1.4
+    ✔ forcats   1.0.0     ✔ stringr   1.5.0
     ✔ ggplot2   3.4.4     ✔ tibble    3.2.1
-    ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+    ✔ lubridate 1.9.3     ✔ tidyr     1.3.0
     ✔ purrr     1.0.2     
 
     ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
@@ -108,7 +128,7 @@ library(dplyr)
 dir.create("dataset")
 ```
 
-    Warning in dir.create("dataset"): 'dataset' already exists
+    Warning in dir.create("dataset"): 'dataset' уже существует
 
 ``` r
 curl::multi_download("https://storage.yandexcloud.net/arrow-datasets/tm_data.pqt", "dataset/ya_dt.pqt",
@@ -117,9 +137,9 @@ curl::multi_download("https://storage.yandexcloud.net/arrow-datasets/tm_data.pqt
 ```
 
     # A tibble: 1 × 10
-      success status_code resumefrom url    destfile error type  modified
-      <lgl>         <int>      <dbl> <chr>  <chr>    <chr> <chr> <dttm>  
-    1 TRUE            416          0 https… /home/u… <NA>  appl… NA      
+      success status_code resumefrom url    destfile error type  modified           
+      <lgl>         <int>      <dbl> <chr>  <chr>    <chr> <chr> <dttm>             
+    1 TRUE            206          0 https… "C:\\Us… <NA>  appl… 2024-02-19 15:25:05
     # ℹ 2 more variables: time <dbl>, headers <list>
 
 -   Посмотрим содержимое нашего датасета, чтобы убедиться, что он
@@ -149,11 +169,11 @@ full_df %>% glimpse()
 
     FileSystemDataset with 1 Parquet file (query)
     105,747,730 rows x 5 columns
-    $ timestamp <timestamp[ns, tz=UTC]> 2020-01-06 16:12:52, 2020-01-06 16:12:52, 20…
-    $ src                      <string> "14.54.42.56", "15.74.95.106", "18.71.115.99…
-    $ dst                      <string> "15.102.44.91", "14.42.45.48", "14.53.57.86"…
-    $ port                      <int32> 90, 102, 52, 89, 40, 37, 26, 114, 56, 106, 1…
-    $ bytes                     <int32> 42, 36686, 9974, 23089, 30897, 5305, 1168, 3…
+    $ timestamp <timestamp[ns, tz=UTC]> 2020-01-06 16:00:00, 2020-01-06 16:00:00, 20…
+    $ src                      <string> "13.43.52.51", "16.79.101.100", "18.43.118.1…
+    $ dst                      <string> "18.70.112.62", "12.48.65.39", "14.51.30.86"…
+    $ port                      <int32> 40, 92, 27, 57, 115, 92, 65, 123, 79, 72, 12…
+    $ bytes                     <int32> 57354, 11895, 898, 7496, 20979, 8620, 46033,…
     Call `print()` for query details
 
 ## Обработка данных
@@ -270,18 +290,18 @@ df_inside_new %>% head(10)
 ```
 
     # A tibble: 10 × 5
-       timestamp           src          dst            port bytes
-       <dttm>              <chr>        <chr>         <int> <int>
-     1 2020-01-06 16:19:19 13.38.72.85  18.49.86.46      74 78891
-     2 2020-01-06 16:19:19 12.54.59.43  17.77.98.108     89 44243
-     3 2020-01-06 16:19:19 13.59.119.28 17.26.80.47      90    42
-     4 2020-01-06 16:19:19 14.36.60.74  18.116.23.80     61   988
-     5 2020-01-06 16:19:19 13.45.80.96  17.75.112.59     65 30883
-     6 2020-01-06 16:19:19 13.40.107.29 15.54.47.113     50  1095
-     7 2020-01-06 16:19:19 14.46.31.105 19.32.57.107     65 11154
-     8 2020-01-06 16:19:19 13.58.83.123 19.125.73.119    42  1337
-     9 2020-01-06 16:19:19 13.34.27.126 16.95.85.89      44 35127
-    10 2020-01-06 16:19:19 14.36.125.87 16.45.118.73     40  4118
+       timestamp           src           dst            port bytes
+       <dttm>              <chr>         <chr>         <int> <int>
+     1 2020-01-06 16:00:00 13.43.52.51   18.70.112.62     40 57354
+     2 2020-01-06 16:00:00 14.33.30.103  15.24.31.23     115 20979
+     3 2020-01-06 16:00:00 12.46.104.126 16.25.76.33     123  1500
+     4 2020-01-06 16:00:00 12.43.98.93   18.85.31.68      79   979
+     5 2020-01-06 16:00:00 13.48.126.55  18.100.109.39   123  1500
+     6 2020-01-06 16:00:00 14.51.37.21   16.118.26.44    123  1500
+     7 2020-01-06 16:00:00 14.49.44.92   18.36.97.103     22  1152
+     8 2020-01-06 16:00:00 14.53.76.24   16.73.63.85     118  5775
+     9 2020-01-06 16:00:00 14.37.108.54  17.107.62.101    94  1086
+    10 2020-01-06 16:00:00 12.45.122.125 17.103.35.100    25    42
 
 -   Сгруппируем трафик по портам и найдем те, для которых разница между
     максимальным и средним количеством переданных байтов максимальна,
@@ -302,8 +322,7 @@ print(diff_port)
     1    37   35090.   209402 32136394510  174312.
 
 -   Теперь, когда мы знаем порт (37), найдем IP-адреса отправителей,
-    которые передали количество данных более 37543 байт и посмотрим на
-    того, кто передал больше всего.
+    которые передали большое количество данных.
 
 ``` r
 sus_port <- df_inside_new %>% filter(port == 37) %>% group_by(src) %>%
