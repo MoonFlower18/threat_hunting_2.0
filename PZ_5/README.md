@@ -338,9 +338,8 @@ cat("IP-адрес подозрительного хоста:", sus5_port_1$src,
     количество трафика, а значит необходимо отсеять все активные порты
 
 ``` r
-bots <- df_5_inside %>%
-  group_by(port) %>%
-  summarise(min_bytes = min(bytes), max_bytes = max(bytes), avg_bytes = mean(bytes),
+bots <- df_5_inside %>% group_by(port) %>% 
+  summarise(min_bytes = min(bytes), max_bytes = max(bytes), avg_bytes = mean(bytes), 
             diff_bytes = max(bytes) - min(bytes)) %>%
   filter(avg_bytes - min_bytes < 10 & min_bytes != max_bytes)
 
@@ -364,8 +363,7 @@ cat("Номер порта для управления ботами:", bots5$por
 между собой?
 
 ``` r
-p2p <- df_5 %>%
-  filter(grepl('^1[2-4].*', src) & grepl('^1[2-4].*', dst)) %>% group_by(port) %>%
+p2p <- df_5 %>% filter(grepl('^1[2-4].*', src) & grepl('^1[2-4].*', dst)) %>% group_by(port) %>%
   summarise(diff_bytes = max(bytes) - min(bytes)) %>% arrange(desc(diff_bytes))
 
 p2p_2 <- p2p %>% collect() %>% head(1)
@@ -385,8 +383,7 @@ cat("Номер порта бота для для внутреннего общ�
 у данного хоста нет. Определите IP такого хоста.
 
 ``` r
-spam <- df_5 %>%
-  filter(grepl('^1[2-4].*', src) & grepl('^1[2-4].*', dst)) %>% group_by(src) %>%
+spam <- df_5 %>% filter(grepl('^1[2-4].*', src) & grepl('^1[2-4].*', dst)) %>% group_by(src) %>%
   summarise(count = n()) %>% arrange(desc(count))
 
 spam2 <- spam %>% collect() %>% head(1)
@@ -406,8 +403,7 @@ cat("IP-адрес, который ретранслирует команды в 
 используется продвинутой бот-сетью для коммуникации?
 
 ``` r
-bots2 <- df_5 %>%
-  filter(timestamp == max(timestamp))
+bots2 <- df_5 %>% filter(timestamp == max(timestamp))
 
 bots2_5 <- bots2 %>% collect()
 
@@ -421,6 +417,17 @@ cat("Номер порта, который используется продви
 ***Поставленная задача***
 
 Одна из наших машин сканирует внутреннюю сеть. Что это за система?
+
+``` r
+mash <- df_5 %>% filter(grepl('^1[2-4].*', src) & grepl('^1[2-4].*', dst)) %>%
+  group_by(src) %>% summarise(time = mean(timestamp), count = n_distinct(dst)) %>% arrange(time)
+
+mash2 <- mash %>% collect() %>% head(1)
+
+cat("IP-адрес машины, которая сканирует внутреннюю сеть:", mash2$src)
+```
+
+    IP-адрес машины, которая сканирует внутреннюю сеть: 12.35.59.94
 
 ## Оценка результата
 
