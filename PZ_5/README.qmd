@@ -28,7 +28,57 @@ format:
 
 ## Ход работы
 
-текст
+### 1. Настройка подключения к IDE Rstudio Server через ssh-туннель
+
+- Подключимся к RStudio Server аналогично предыдущей практической работе. 
+
+```{}
+PS C:\Users\Юлия> ssh -i "C:\Users\\Downloads\Telegram Desktop\rstudio.key" -L 8787:127.0.0.1:8787 user18@62.84.123.211
+```
+
+![](screen/1.png)
+
+### 2. Настройка рабочего пространства
+
+- Первым делом установим необходимые пакеты и библиотеки
+
+```{r}
+library(dplyr)
+library(tidyverse)
+install.packages("ClickHouseHTTP")
+library(ClickHouseHTTP)
+library(DBI)
+```
+
+- Данные хранятся в `СУБД Clickhouse`, поэтому нужно подключиться к хосту.
+
+```{r}
+con_click <- dbConnect(
+  ClickHouseHTTP::ClickHouseHTTP(),
+  host="rc1d-sbdcf9jd6eaonra9.mdb.yandexcloud.net",
+  port=8443,
+  user="student24dwh",
+  password="DiKhuiRIVVKdRt9XON",
+  db="TMdata",
+  https=TRUE,
+  ssl_verifypeer=FALSE)
+```
+
+- После подключения нужно занести в локальную переменную таблицу `data` из СУБД.
+
+```{r}
+db <- dbReadTable(con_click, "data")
+df <- dbGetQuery(con_click, "SELECT * FROM data")
+
+df %>% head (10)
+```
+
+- Поле `timestamp` снова отображается некорректно, поэтому исправим его тип данных.
+
+```{r}
+df_5 <- df %>% mutate(timestamp = as_datetime(timestamp / 1000, origin = "1970-01-01", tz = "UTC"))
+df_5 %>% glimpse()
+```
 
 ## Обработка данных
 
@@ -38,11 +88,27 @@ format:
 
 Важнейшие документы с результатами нашей исследовательской деятельности в области создания вакцин скачиваются в виде больших заархивированных дампов. Один из хостов в нашей сети используется для пересылки этой информации – он пересылает гораздо больше информации на внешние ресурсы в Интернете, чем остальные компьютеры нашей сети. Определите его IP-адрес.
 
+- Для начала определим IP адреса внутренней сети, которые начинаются с 12-14 октетов.
 
+```{r}
+df_5_inside <- df_5 %>%
+  filter(str_detect(src, "^1[2-4].")) %>%
+  filter(!str_detect(dst, "^1[2-4]."))
 
+df_5_inside %>% glimpse()
+```
 
+- Используя отфильтрованные данные внутреннего трафика, сгрупируем по IP-адресу источника и просуммируем его общее количество байтов. Выведем на экран итоговые значения источика с наибольшим количеством байтов.
 
+```{r}
+sus_host5 <- df_5_inside %>% group_by(src) %>% 
+  summarise(ins_sum5 = sum(bytes)) %>% arrange(desc(ins_sum5)) %>% collect()
 
+sus_host5_1 <- sus_host5 %>% head(1)
+
+cat("IP-адрес подозрительного хоста:", sus_host5_1$src, "\n", 
+    "Сумма затраченного трафика (байт)", format(sus_host5_1$ins_sum5, scientific = FALSE))
+```
 
 ### Задание  2: Надите утечку данных 2
 
