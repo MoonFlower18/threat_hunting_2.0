@@ -303,6 +303,20 @@ cat("IP-адрес подозрительного хоста:", sus4_port_1$src,
 одинаковым номером порта. Какой номер порта используется бот-панелью для
 управления ботами?
 
+``` r
+bots <- df_4_inside %>%
+  group_by(port) %>%
+  summarise(min_bytes = min(bytes), max_bytes = max(bytes), avg_bytes = mean(bytes),
+            diff_bytes = max(bytes) - min(bytes)) %>%
+  filter(avg_bytes - min_bytes < 10 & min_bytes != max_bytes)
+
+bots4 <- bots %>% collect()
+
+cat("Номер порта для управления ботами:", bots4$port)
+```
+
+    Номер порта для управления ботами: 124
+
 ### Задание 5: Обнаружение P2P трафика
 
 ***Поставленная задача*** Иногда компрометация сети проявляется в
