@@ -30,8 +30,6 @@ format:
 
 ## Ход работы
 
-## Ход работы
-
 ### 1. Настройка подключения к IDE Rstudio Server через ssh-туннель
 
 - Подключимся к RStudio Server аналогично предыдущей практической работе. 
@@ -52,7 +50,27 @@ library(tidyverse)
 library(dplyr)
 ```
 
-- 
+- Создадим подключение к базе данных DuckDB, используя память в качестве места хранения БД.
+
+```{r}
+db_con <- dbConnect(duckdb::duckdb(), dbdir = ":memory:")
+dbExecute(conn = db_con, "INSTALL httpfs; LOAD httpfs;")
+```
+```{r}
+ParquetFile_4 = "https://storage.yandexcloud.net/arrow-datasets/tm_data.pqt"
+
+SQL_query <- "SELECT * FROM read_parquet([?])"
+df_4 <- dbGetQuery(db_con, SQL_query, list(ParquetFile_4))
+
+df_4 %>% glimpse()
+```
+
+- Поле `timestamp` снова отображается некорректно, поэтому исправим его тип данных.
+
+```{r}
+df_4 <- df_4 %>% mutate(timestamp = as_datetime(timestamp / 1000, origin = "1970-01-01", tz = "UTC"))
+df_4 %>% glimpse()
+```
 
 ## Обработка данных
 
@@ -61,7 +79,27 @@ library(dplyr)
 ***Поставленная задача***
 Важнейшие документы с результатами нашей исследовательской деятельности в области создания вакцин скачиваются в виде больших заархивированных дампов. Один из хостов в нашей сети используется для пересылки этой информации – он пересылает гораздо больше информации на внешние ресурсы в Интернете, чем остальные компьютеры нашей сети. Определите его IP-адрес.
 
+- Для начала определим IP адреса внутренней сети, которые начинаются с 12-14 октетов.
 
+```{r}
+df_4_inside <- df_4 %>%
+  filter(str_detect(src, "^1[2-4].")) %>%
+  filter(!str_detect(dst, "^1[2-4]."))
+
+df_4_inside %>% glimpse()
+```
+
+- Используя отфильтрованные данные внутреннего трафика, сгрупируем по IP-адресу источника и просуммируем его общее количество байтов. Выведем на экран итоговые значения источика с наибольшим количеством байтов.
+
+```{r}
+sus_host4 <- df_4_inside %>% group_by(src) %>% 
+  summarise(ins_sum4 = sum(bytes)) %>% arrange(desc(ins_sum4)) %>% collect()
+
+sus_host4_1 <- sus_host4 %>% head(1)
+
+cat("IP-адрес подозрительного хоста:", sus_host4_1$src, "\n", 
+    "Сумма затраченного трафика (байт)", format(sus_host4_1$ins_sum4, scientific = FALSE))
+```
 
 ### Задание  2: Надите утечку данных 2
 
