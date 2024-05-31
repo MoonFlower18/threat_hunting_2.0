@@ -137,9 +137,9 @@ curl::multi_download("https://storage.yandexcloud.net/arrow-datasets/tm_data.pqt
 ```
 
     # A tibble: 1 × 10
-      success status_code resumefrom url    destfile error type  modified           
-      <lgl>         <int>      <dbl> <chr>  <chr>    <chr> <chr> <dttm>             
-    1 TRUE            206          0 https… "C:\\Us… <NA>  appl… 2024-02-19 15:25:05
+      success status_code resumefrom url    destfile error type  modified
+      <lgl>         <int>      <dbl> <chr>  <chr>    <chr> <chr> <dttm>  
+    1 TRUE            416          0 https… "C:\\Us… <NA>  appl… NA      
     # ℹ 2 more variables: time <dbl>, headers <list>
 
 -   Посмотрим содержимое нашего датасета, чтобы убедиться, что он
@@ -276,7 +276,7 @@ cat("IP-адрес подозрительного хоста:", sus_cron_1$src, 
 Еще один нарушитель собирает содержимое электронной почты и отправляет в
 Интернет используя порт, который обычно используется для другого типа
 трафика. Атакующий пересылает большое количество информации используя
-этот порт, которое нехарактерно для других хостов, использующих этот
+этот порт, которое не характерно для других хостов, использующих этот
 номер порта. Определите IP этой системы. Известно, что ее IP адрес
 отличается от нарушителей из предыдущих задач.
 
