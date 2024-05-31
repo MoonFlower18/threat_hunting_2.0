@@ -200,6 +200,14 @@ END
 CONCAT([byt_gb3], " Гб")
 ```
 
+### 4. Сделаем дашборд из ранее созданных чартов. 
+
+![](screen/11.png)
+
+**Ссылка на дашборд: ** 
+
+[Анализ сетевой активности](https://datalens.yandex.cloud/xhzmkba3ek4al-analiz-setevoy-aktivnosti)
+
 ## Оценка результатов
 
 текст
